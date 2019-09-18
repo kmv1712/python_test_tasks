@@ -1,0 +1,20 @@
+import re
+first = 0
+group, result_list = [], []
+input_string = input()
+# input_string = '3ab4c2CaB'
+for k, char in enumerate(input_string):
+    if char.isdigit():
+        continue
+    elif char.isalpha():
+        group.append(input_string[first:k+1])
+        first = k+1
+for item in group:
+    # Получим список из чисел которые есть в строке.
+    number = re.findall(r'\d+', item)
+    # Получим список из букв которые есть в строке.
+    alpha = re.findall(r'\D+', item)
+    result_list.append(alpha[0] * int(number[0] if number else 1))
+print(''.join(result_list))
+
+# Вернет: aaabccccCCaB
