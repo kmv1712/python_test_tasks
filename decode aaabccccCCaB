@@ -6,3 +6,6 @@ group_char = [list(g) for k, g in groupby(string_input)]
 for item in group_char:
     result_list.append('{0}{1}'.format('' if len(item) == 1 else len(item), item[0]))
 print(''.join(result_list))
+
+# Интересное альтернативное решение с помощью re
+re.findall(r'((\w)\2*)', 'aaabccccCCaB') 
