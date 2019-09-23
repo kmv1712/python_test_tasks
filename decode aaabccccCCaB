@@ -1,0 +1,8 @@
+from itertools import groupby
+string_input = 'aaabccccCCaB'
+result_list = []
+# Группируем в списки одинаковые символы.
+group_char = [list(g) for k, g in groupby(string_input)]
+for item in group_char:
+    result_list.append('{0}{1}'.format('' if len(item) == 1 else len(item), item[0]))
+print(''.join(result_list))
