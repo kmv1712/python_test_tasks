@@ -18,3 +18,52 @@ pip freeze > requirement.txt
 Загрузить в проект библиотеки из requirement.txt
 pip install -r requirements.txt
 
+Создать новое пустое приложение с именем bbord 
+ ./manage.py startapp bbord
+
+Добавить созданое приложение в INSTALLED_APPS
+'bbord.apps.BbordConfig'
+
+
+1.5.Контроллеры
+Контроллер Django(view) - это код, запускаемый в ответ на поступление клиентского запроса, который сожержит интернет-адрес определенного формата. Именно в контроллерах выполняются все действия по подготовке данных для вывода, равно как и обработка данных, поступивших от посетителя  
+
+1.6. Маршруты и маршрутизатор.
+Файлы urls
+
+Создадим в файле bbord файл urls.py и укажем 
+
+from django.urls import path
+
+from .views import index
+
+urlpatterns = [
+    path('', index),
+]
+
+Поправим основной шаблон urls.py 
+from django.contrib import admin
+from django.urls import path, include
+
+from bbord.views import index
+
+urlpatterns = [
+    path('bbord', include('bbord.urls'))
+    path('admin/', admin.site.urls),
+]
+
+
+1.7.Модели.
+Сама модель должна быть подкласом класса Model
+
+Примеры типов
+CharField - обычное строковое поле фиксированной длинны max_length(макс. кол-во символов)
+TextField - текстовое поле не ограниченной длины, или memo-поле() null=True, blank=True(значит поле можно не заполнять).
+FloatField
+DateTimeField
+
+Если указать db_index=True, то поле станет индексируемым.
+
+В Django поле для идентификаторов объявлять не надо. стр.35.
+
+
