@@ -1,0 +1,20 @@
+Учим django
+
+Создадим виртуальную среду с названием env.
+python3 -m venv env
+
+Активируем виртуальную среду.
+source env/bin/activate
+
+Установим библиотеку django в активированую виртуальную среду.
+pip install django
+
+Запустим проект django с именем samplesite.
+django-admin startproject samplesite
+
+Записать установленные библиотеки в requirement.txt
+pip freeze > requirement.txt
+
+Загрузить в проект библиотеки из requirement.txt
+pip install -r requirements.txt
+
