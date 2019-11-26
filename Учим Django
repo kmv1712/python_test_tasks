@@ -18,11 +18,20 @@ pip freeze > requirement.txt
 Загрузить в проект библиотеки из requirement.txt
 pip install -r requirements.txt
 
-Создать новое пустое приложение с именем bbord 
- ./manage.py startapp bbord
+Создать новое пустое приложение с именем bboard 
+ ./manage.py startapp bboard
 
 Добавить созданое приложение в INSTALLED_APPS
-'bbord.apps.BbordConfig'
+'bboard.apps.BbordConfig'
+
+Запустим генерирование миграции
+./manage.py makemigrations bboard
+
+Посмотреть сгенерированый код для СУБД на SQL
+./manage.py sqlmigrate bboard 0001
+
+Выполнить сгенерированную миграцию.
+./manage.py migrate
 
 
 1.5.Контроллеры
@@ -31,7 +40,7 @@ pip install -r requirements.txt
 1.6. Маршруты и маршрутизатор.
 Файлы urls
 
-Создадим в файле bbord файл urls.py и укажем 
+Создадим в файле bboard файл urls.py и укажем 
 
 from django.urls import path
 
@@ -45,10 +54,10 @@ urlpatterns = [
 from django.contrib import admin
 from django.urls import path, include
 
-from bbord.views import index
+from bboard.views import index
 
 urlpatterns = [
-    path('bbord', include('bbord.urls'))
+    path('bboard', include('bboard.urls'))
     path('admin/', admin.site.urls),
 ]
 
@@ -64,6 +73,10 @@ DateTimeField
 
 Если указать db_index=True, то поле станет индексируемым.
 
-В Django поле для идентификаторов объявлять не надо. стр.35.
+В Django поле для идентификаторов объявлять не надо.
+
+1.8. Миграции
+
+Миграции - это модуль Python, созданный самим Django на основе определенной модели и предназначенный для формирования в базе данных всех требуемых этой моделью структур: таблиц, полей, индексов, правил и связей.
 
 
