@@ -2,3 +2,4 @@
 ssh-keygen 
 Чтобы каждый раз не вводить пароль на passphrase жмем Enter
 is_rsa.pub добавляем туда куда хотим попасть
+На GitHub Setting -> SSH and GPG keys -> New SSH key
