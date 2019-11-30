@@ -4,5 +4,19 @@ ssh-keygen
 is_rsa.pub добавляем туда куда хотим попасть
 На GitHub Setting -> SSH and GPG keys -> New SSH key
 
+Далее чтобы ключ подхватывался всеми приложениями, которые пользуются ssh, нужно указать его в файле конфигурации, который хранится в папке .ssh домашней директории
+
+    touch ~/.ssh/config
+    notepad ~/.ssh/config
+
+
+
+Туда нужно внести такие строки
+
+    Host github.com
+    HostName github.com
+    Port 22
+    IdentityFile /c/project/.ssh/id_rsa
+
 Если надо поменять скллонированый по http на ssh тогда в  .git/config -> [remote "origin"] ->
  url помнять на путь ssh
