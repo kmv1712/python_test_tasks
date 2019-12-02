@@ -153,3 +153,67 @@ for b in Bd.objects.filter(title='Дом'):
 Метод delete () модели, как уже понятно, удаляет текущую запись и возвращает
 сведения о количестве удаленных записей, обычно малополезные.
 
+1.11.Шаблоны.
+
+Аналогично for .. in ... в python
+{% for bb in bbs %}
+...
+{% endfor %}
+
+Достать title из объекта bb
+{{ bb.title }}
+
+Преобразует дату в заданный формат.
+<p>{{ bb.published|date:"d.m.Y H:i:s" }}</p> 
+
+Рендеринг шаблонов. Сокращения
+
+Контекстом шаблона называется набор данных, которые должны быть доступны внутри шаблона в виде переменных и с которыми шаблонизатор объеденит этот шаблон для получения выходного документа.
+
+
+1.13 Административный веи-сайт Django
+
+LANGUAGE_CODE = 'ru-ru'
+Открыть admin.py
+
+1.14 Параметры полей и моделей.
+
+verbose_name. Он указывает человеческое название поля, которое
+verbose _name_plural множественое 
+
+будет выводиться на экран.
+
+class Bd(models.Model):
+    title = models.CharField(max_length=50, verbose_name='Товар')
+    content = models.TextField(null=True, blank=True, verbose_name='Описание')
+    price = models.FloatField(null=True, blank=True, verbose_name='Цена')
+    published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
+
+    class Meta:
+        verbose_name_plural = 'Объявления'
+        verbose_name = 'Объявление'
+        ordering = ['-published']
+
+ordering - Последовательность полей, по которым по умолчанию будет выполнятся сортировка
+
+1.15. Редактор модели
+
+Представление модели на административном сайте по умолчанию. Если же
+оно нас не устраивает, мы можем задать свои параметры представления модели,
+объявив для нее класс-редактор.
+
+from django . contrib import admin
+from .models import ВЬ
+    class BbAdmin(admin.ModelAdmin):
+        list_display = ('title', 'content', 'price', 'published')
+        list_display_links = ('title', 'content')
+        search_fields = ('title', 'content', )
+        admin.site.register(Bb, BbAdmin)
+
+- list_displa у - последовательность имен полей, которые должны выводиться
+в списке записей;
+- list_display_links - последовательность имен полей, которые должны быть
+преобразованы в гиперссылки, ведущие на страницу правки записи;
+- search_fields - последовательность имен полей, по которым должна вьшол-
+няться фильтрация.
+
