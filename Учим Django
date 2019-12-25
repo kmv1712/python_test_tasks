@@ -565,3 +565,16 @@ field.help_text
 >>> b.ruЬric.name
 'Недвижимость'
 
+
+
+стр.438
+
+from django.dispatch import Signal
+add_bb = Signal(providing_args=['instance', 'ruЬric'])  # Создать свой сигнал
+add_bb.send(Bb, instance=bb, rubric=bb.ruЬric)  # Установить его в месте в котором хочешь его отправить
+
+def add_bb_dispatcher(sender, **kwargs):
+    """Обработчик сигнала"""
+    рrint('Объявление в рубрике "%s" с ценой %.2f создано' % (kwargs['rubric'] .name, kwargs['instance'] .price))
+
+    add_bb.connect(add_bb_dispatcher) # Зацепить обработчик за сигнал
