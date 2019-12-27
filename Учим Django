@@ -1,4 +1,7 @@
 Учим django
+Запустить, остановить супервизор:
+sudo service supervisor start
+sudo service supervisor stop
 
 Создадим виртуальную среду с названием env.
 python3 -m venv env
