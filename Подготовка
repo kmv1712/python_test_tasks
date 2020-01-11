@@ -2,8 +2,39 @@ jewelry, stones =  input(), input()
 print(len([i for i in stones if i in jewelry]))
 
 
-# Подумать
+# Подумать не укладываюсь в 1с и 10мб
 сount_int = int(input())
 total = sorted(set([input() for i in range(count_int)]))
 for j in total:
 	print(j)
+
+
+count_int = int(input())
+list_with_input_int = []
+for i in range(count_int):
+    user_input = int(input()) 
+    if not user_input in list_with_input_int:
+        list_with_input_int.append(user_input)
+list_with_input_int.sort()
+for j in list_with_input_int:
+    print(j)
+
+# print('\n'.join(map(lambda x: str(x), list_with_input_int)))
+
+# Укладываюсь в 1с и 10мб
+# время 483ms
+for j in sorted(list(set(int(input()) for i in range(int(input()))))):
+    print(j)
+
+# время 490ms
+count_int = int(input())
+for j in sorted(list(set(int(input()) for i in range(count_int)))):
+    print(j)
+
+# Удивительно, но не укладываюсь в 10мб, я думал что без list быстрее, но оказалось set сортируется дольше
+count_int = int(input())
+for j in sorted(set(int(input()) for i in range(count_int))):
+    print(j)
+
+
+
