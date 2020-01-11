@@ -1,0 +1,9 @@
+jewelry, stones =  input(), input()
+print(len([i for i in stones if i in jewelry]))
+
+
+# Подумать
+сount_int = int(input())
+total = sorted(set([input() for i in range(count_int)]))
+for j in total:
+	print(j)
