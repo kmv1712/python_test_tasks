@@ -36,5 +36,7 @@ count_int = int(input())
 for j in sorted(set(int(input()) for i in range(count_int))):
     print(j)
 
+# Анаграммы 
+print(int(sorted(list(input())) == sorted(list(input()))))
 
 
