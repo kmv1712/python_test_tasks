@@ -97,21 +97,23 @@ for i in list_valid_brackets_sequences:
 
 
 # Рекурсивный
-k = 6 # количество скобок
-init = [0] * k # пустой список, куда кладем скобки
-cnt = 0 # разница между скобками
-ind = 0 # индекс, по которому кладем скобку в список 
+quantity_brackets = 8 # количество скобок
+arr = [0] * quantity_brackets # пустой список, куда кладем скобки
+difference_between_brackets = 0 # разница между скобками
+index_insert_bracket = 0 # индекс, по которому кладем скобку в список 
 
-def f(cnt, ind, k, init):
+def print_valid_brackets_sequences(difference_between_brackets, index_insert_bracket, quantity_brackets, arr):
     # кладем откр. скобку, только если хватает места
-    if (cnt <= k - ind - 2):
-        init[ind] = '('
-        f(cnt + 1, ind + 1, k, init)
+    if (difference_between_brackets <= quantity_brackets - index_insert_bracket - 2):
+        arr[index_insert_bracket] = '('
+        f(difference_between_brackets + 1, index_insert_bracket + 1, quantity_brackets, arr)
     # закр. скобку можно положить всегда, если cnt > 0
-    if cnt > 0:
-        init[ind] = ')'
-        f(cnt - 1, ind + 1, k, init)
+    if difference_between_brackets > 0:
+        arr[index_insert_bracket] = ')'
+        f(difference_between_brackets - 1, index_insert_bracket + 1, quantity_brackets, arr)
     # выходим из цикла и печатаем
-    if ind == k:
-        if cnt == 0:
-            print (init)
+    if index_insert_bracket == quantity_brackets:
+        if difference_between_brackets == 0:
+            print(arr)
+
+print_valid_brackets_sequences(difference_between_brackets, index_insert_bracket, quantity_brackets, arr)
