@@ -42,4 +42,21 @@ print(int(sorted(list(input())) == sorted(list(input()))))
 # Самая длинная последовательность едениц
 print(len(max(''.join([input() for i in range(int(input()))]).split('0'))))
 
+def quicksort(array):
+    if len(array) < 2:
+        return array
+    else:
+        pivot = array[0]
+        less = [i for i in array[1:] if i <= pivot]
+        greater = [i for i in array[1:] if i > pivot]
+        return quicksort(less) + [pivot] + quicksort(greater)
+
+# Быстрая сортировка
+list_all = []
+
+for i in range(int(input())):
+    list_all.extend(list(map(lambda x: int(x), input().split(' ')[1:])))
+
+for j in quicksort(list_all):
+    print(j, end=' ')
 
