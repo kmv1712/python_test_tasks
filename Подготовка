@@ -95,13 +95,7 @@ list_valid_brackets_sequences = get_list_valid_brackets_sequences(quantity_brack
 for i in list_valid_brackets_sequences:
     print(i)
     
-    
-# Рекурсивный
-quantity_brackets = 6 # количество скобок
-arr = [0] * quantity_brackets # пустой список, куда кладем скобки
-difference_between_brackets = 0 # разница между скобками
-index_insert_bracket = 0 # индекс, по которому кладем скобку в список 
-
+# Рекурсивно
 def print_valid_brackets_sequences(difference_between_brackets, index_insert_bracket, quantity_brackets, arr):
     # кладем откр. скобку, только если хватает места
     if (difference_between_brackets <= quantity_brackets - index_insert_bracket - 2):
@@ -112,8 +106,7 @@ def print_valid_brackets_sequences(difference_between_brackets, index_insert_bra
         arr[index_insert_bracket] = ')'
         print_valid_brackets_sequences(difference_between_brackets - 1, index_insert_bracket + 1, quantity_brackets, arr)
     # выходим из цикла и печатаем
-    if index_insert_bracket == quantity_brackets:
-        if difference_between_brackets == 0:
-            print(arr)
+    if index_insert_bracket == quantity_brackets and difference_between_brackets == 0:
+        print(arr)
 
 print_valid_brackets_sequences(difference_between_brackets, index_insert_bracket, quantity_brackets, arr)
