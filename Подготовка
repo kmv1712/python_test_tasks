@@ -60,3 +60,58 @@ for i in range(int(input())):
 for j in quicksort(list_all):
     print(j, end=' ')
 
+# Скобки
+# Итеративный
+def get_list_valid_brackets_sequences(quantity_brackets, arr):
+    # запишем нулевую последовательность
+    list_valid_brackets_sequences = [' '.join(arr)]
+    while True:
+        ind = quantity_brackets - 1
+        cnt = 0
+        # находим откр. скобку, которую можно заменить
+        while ind >= 0:
+            if arr[ind] == ')':
+                cnt -= 1
+            if arr[ind] == '(':
+                cnt += 1
+            if cnt < 0 and arr[ind] =='(':
+                break
+            ind -= 1
+        # если не нашли, то алгоритм заканчивает работу
+        if ind < 0:
+            break
+        # заменяем на закр. скобку
+        arr[ind] = ')'
+        # заменяем на самую лексикографическую минимальную
+        for i in range(ind + 1, quantity_brackets):
+            if i <= (quantity_brackets - ind + cnt) / 2 + ind:
+                arr[i] = '('
+            else:
+                arr[i] = ')'
+        list_valid_brackets_sequences.append(' '.join(arr))
+    return list_valid_brackets_sequences
+
+list_valid_brackets_sequences = get_list_valid_brackets_sequences(quantity_brackets, arr)
+for i in list_valid_brackets_sequences:
+    print(i)
+
+
+# Рекурсивный
+k = 6 # количество скобок
+init = [0] * k # пустой список, куда кладем скобки
+cnt = 0 # разница между скобками
+ind = 0 # индекс, по которому кладем скобку в список 
+
+def f(cnt, ind, k, init):
+    # кладем откр. скобку, только если хватает места
+    if (cnt <= k - ind - 2):
+        init[ind] = '('
+        f(cnt + 1, ind + 1, k, init)
+    # закр. скобку можно положить всегда, если cnt > 0
+    if cnt > 0:
+        init[ind] = ')'
+        f(cnt - 1, ind + 1, k, init)
+    # выходим из цикла и печатаем
+    if ind == k:
+        if cnt == 0:
+            print (init)
