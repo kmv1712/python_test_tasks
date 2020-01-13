@@ -107,7 +107,7 @@ def print_valid_brackets_sequences(difference_between_brackets, index_insert_bra
     if (difference_between_brackets <= quantity_brackets - index_insert_bracket - 2):
         arr[index_insert_bracket] = '('
         print_valid_brackets_sequences(difference_between_brackets + 1, index_insert_bracket + 1, quantity_brackets, arr)
-    # закр. скобку можно положить всегда, если cnt > 0
+    # закр. скобку можно положить всегда, если difference_between_brackets > 0
     if difference_between_brackets > 0:
         arr[index_insert_bracket] = ')'
         print_valid_brackets_sequences(difference_between_brackets - 1, index_insert_bracket + 1, quantity_brackets, arr)
