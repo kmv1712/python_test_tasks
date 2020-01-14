@@ -110,3 +110,62 @@ def print_valid_brackets_sequences(difference_between_brackets, index_insert_bra
         print(arr)
 
 print_valid_brackets_sequences(difference_between_brackets, index_insert_bracket, quantity_brackets, arr)
+
+
+# Последовательность чисел Фибоначи.
+# Рекурсивно
+def fib(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        list_seq_fib.append(1)
+        return 1
+    result = fib(n-2) + fib(n-1)
+    list_seq_fib.append(result) 
+
+if __name__ == '__main__':
+    list_seq_fib = [] 
+    print(fib(int(input())))
+    result = sorted(set(list_seq_fib))
+    result.insert(0, 1)
+    print(result)
+
+
+# Декораторы
+from datetime import datetime
+
+def timeit(arg):
+    print(arg)
+    def outer(func)
+        def wrapper(*args, **kwargs):
+            start = datetime.now()
+            result = func(*args, **kwargs)
+            print(datetime.now() - start)
+            return result
+        return wrapper
+    return outer
+
+@timeit('name')
+def one(n):
+    start = datetime.now()
+    l = []
+    for i in range(10**4):
+        if i % 2 == 0:
+            l.append(i)
+    print(datetime.now() - start)
+    return l
+
+@timeit('name')
+def two(n):
+    start = datetime.now()
+    l = [x for x in range(10**4) if x % 2 == 0]
+    print(datetime.now() - start)
+
+
+l1 = timeit('name')(one)(10)
+
+
+# Когда код можно вынести за скобки
+# Декораторы реализуются через механизм замыкания.
+# Использовние декораторов для роутинга и логирования напр в Flask
+# Подсчет времени, логирование с помощью декораторов
