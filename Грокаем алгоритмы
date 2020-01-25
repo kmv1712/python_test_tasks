@@ -1,0 +1,26 @@
+Бинарный пописк (O(Log n)) Log2 8 =3 Надо двойку 3 раза перемножить чтобы получить 8
+Логарифм операция обратная возведению в степень
+
+def binary_search(list, item):
+  low = 0
+  hight = len(list) - 1
+  
+  while low <= hight:
+    mid = int((low + hight)/2)
+    guess = list[mid]
+    if guess == item:
+      return mid
+    if guess > item:
+      hight = mid - 1
+    else:
+      low = mid + 1
+  return
+
+my_list = [1, 2, 3, 4, 5, 6]
+item = 4
+
+print(binary_search(my_list, item))
+
+стр. 27
+    
+
