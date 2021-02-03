@@ -1,0 +1,319 @@
+'''
+import threading
+import time
+
+
+def sleeper(n, name):
+    print(f'Привет я {name}. Собираюсь поспать')
+    time.sleep(n)
+    print(f'{name} проснулся')
+
+
+if __name__ == '__main__':
+
+    treading1 = threading.Thread(target=sleeper, name='Thread1', args=(5, 'Thread1'))
+    treading1.start()
+    treading1.join()
+    print('Hello!')
+    '''
+
+##############################Урок 1###################################
+'''
+import threading
+import time
+
+
+def sleeper(n, name):
+    print(f'Привет я {name}. Собираюсь поспать')
+    time.sleep(n)
+    print(f'{name} проснулся')
+
+
+if __name__ == '__main__':
+    treading1 = threading.Thread(target=sleeper, name='Thread1', args=(5, 'Thread1'))
+
+    thread_list = []
+
+    start = time.time()
+
+    for i in range(5):
+        t = threading.Thread(target=sleeper, name=f'Thread{i}', args=(5, f'Thread{i}'))
+        thread_list.append(t)
+        t.start()
+        print(f'{t.name} запустился')
+
+    for t in thread_list:
+        t.join()
+
+    end = time.time()
+    print(f'{end - start}')
+
+    print('Все потоки выполнены')
+    '''
+##############################---###################################
+'''
+import threading
+import time
+
+
+def sleeper(n, name):
+    print(f'Привет я {name}. Собираюсь поспать')
+    time.sleep(n)
+    print(f'{name} проснулся')
+
+
+if __name__ == '__main__':
+    start = time.time()
+    for i in range(5):
+        sleeper(5, i)
+    end = time.time()
+    print(f'{end - start}')
+'''
+##############################Урок 2(demon thread)###################################
+'''
+import threading
+import time
+
+total = 4
+
+def created_item():
+    global total
+    for i in range(10):
+        time.sleep(2)
+        print(f'итерация {i}')
+        total += 1
+    print('итерация выполнена')
+
+
+def created_item_2():
+    global total
+    for i in range(7):
+        time.sleep(1)
+        print(f'итерация {i}')
+        total += 1
+    print('итерация выполнена')
+
+
+def limits_items():
+    global total
+    while True:
+        if total > 5:
+            print('Переполнена')
+            total -= 3
+            print('Привели к 3')
+        else:
+            time.sleep(1)
+            print('ждет')
+    
+    
+if __name__ == '__main__':
+    create_1 = threading.Thread( target=created_item, name='Thread1')
+    create_2 = threading.Thread( target=created_item_2, name='Thread2')
+    limiter = threading.Thread( target=limits_items, daemon=True, name='Limiter')
+
+    create_1.start()
+    create_2.start()
+    limiter.start()
+
+    create_1.join()
+    create_2.join()
+    # limiter.join()
+
+    print('Выполнился основной процесс')
+'''
+##############################Урок 3(Потоковый объект)###################################
+'''
+import threading
+import time
+
+
+class MyThread(threading.Thread):
+
+    def run(self):
+        """Аналог start"""
+        print(f'{self.getName()} поток запущен')
+        try:
+            if self._target:
+                self._target(*self._args, **self._kwargs)
+        finally:
+            del self._target, self._args, self._kwargs
+        print(f'{self.getName()} поток завершился!')
+
+
+def sleeper(n, name):
+    print(f'Привет я {name}. Собираюсь поспать')
+    time.sleep(n)
+    print(f'{name} проснулся')
+
+if __name__ == '__main__':
+    for i in range(4):
+        t = MyThread(target=sleeper, name=f'Thread{i+1}', args=(3, f'Thread{i+1}'))
+        t.start()
+        '''
+##############################Урок 3(Потоковый объект)-1###################################
+'''
+import threading
+import time
+
+
+class MyThread(threading.Thread):
+    def __init__(self, number, func, args):
+        threading.Thread.__init__(self)
+        self.number = number
+        self.func = func
+        self.args = args
+
+    def run(self):
+        """Аналог start"""
+        print(f'{self.number} поток запущен')
+        self.func(*self.args)
+        print(f'{self.number} поток завершился!')
+
+
+def double(number, cycles):
+    for i in range(cycles):
+        number += number
+    print(number)
+
+
+if __name__ == '__main__':
+    thread_list = []
+    for i in range(50):
+        t = MyThread(number=i + 1, func=double, args=(i, 3))
+        thread_list.append(t)
+        t.start()
+
+    for t in thread_list:
+        t.join()
+'''
+
+##############################Урок 3(Потоковый объект)-2###################################
+'''
+import threading
+import time
+
+
+class MyThread(threading.Thread):
+    def __init__(self, number, style, *args, **kwargs):
+        super(MyThread, self).__init__(*args, **kwargs)
+        self.number = number
+        self.style = style
+
+    def run(self, *args, **kwargs):
+        """Аналог start"""
+        print(f'{self.number} поток запущен')
+        super(MyThread, self).run(*args, **kwargs)
+        print(f'{self.number} поток завершился!')
+
+
+def sleeper(num, style):
+    print(f'sleeping for {num} sec style {style}')
+    time.sleep(num)
+
+
+if __name__ == '__main__':
+    t = MyThread(number=3, style='green', target=sleeper, args=(3, 'green'))
+    t.start()
+    '''
+
+##############################Урок 5(Lock)###################################
+'''
+import threading
+import time
+l = threading.Lock()
+
+x = 0
+COUNT = 10000
+
+
+def adding_2():
+    global x
+    with l:
+        for i in range(COUNT):
+            x += 2
+
+
+def adding_3():
+    global x
+    with l:
+        for i in range(COUNT):
+            x += 3
+
+
+def subtrackting_4():
+    global x
+    with l:
+        for i in range(COUNT):
+            x -= 4
+
+
+def subtrackting_1():
+    global x
+    with l:
+        for i in range(COUNT):
+            x -= 1
+
+
+
+for i in range(10000):
+    t = threading.Thread(target=adding_2)
+    t2 = threading.Thread(target=adding_3)
+    t3 = threading.Thread(target=subtrackting_4)
+    t4 = threading.Thread(target=subtrackting_1)
+
+    t.start()
+    t2.start()
+    t3.start()
+    t4.start()
+
+    t.join()
+    t2.join()
+    t3.join()
+    t4.join()
+
+    if x != 0:
+        print(i, x)
+        break
+'''
+##############################Урок 6(Queue)###################################
+
+# FIFO
+# LIFO
+# Primrity
+
+import queue
+import threading
+import time
+
+def putting_thread(q):
+    while True:
+        print('start thead')
+        time.sleep(10)
+        q.put(5)
+        print('sup something')
+
+q = queue.Queue()
+t = threading.Thread(target=putting_thread, args=(q,), daemon=True)
+t.start()
+
+q.put(0)
+print(q.get(), 'first item')
+print('.....')
+
+print(q.get(), 'finish')
+
+'''
+for i in range(5):
+    q.put(i)
+
+while not q.empty():
+    print(q.get(), end=' ')
+
+#### 
+q.put(5)
+
+# Процесс заблокируется если очередь пустая
+print(q.get())
+
+print(q.empty())
+'''
