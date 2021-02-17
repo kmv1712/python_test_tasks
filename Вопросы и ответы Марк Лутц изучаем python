@@ -288,3 +288,51 @@ obj.cmeth(5)
 [<class '__main__.Methods'>, 5]
 
 стр.268
+
+
+Декораторы и метоклассы
+
+class c:
+    @staticmethod
+    def meth():
+
+class C:
+    def meth():
+
+    meth = staticmethod(meth)
+
+
+ВСТРОЕННАЯ ФУНКЦИЯ super
+
+class C:
+...     def act(self):
+...         print('spam')
+... class D(C):
+...     def act(self):
+...         C.act(self)
+...         print('eggs')
+... X = D()
+x.act()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'x' is not defined
+X.act()
+spam
+eggs
+super
+<class 'super'>
+super()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+RuntimeError: super(): no arguments
+class E(C):
+...     def method(self):
+...         proxy = super()
+...         print(proxy)
+...         proxy.act()
+... 
+E().method()
+<super: <class 'E'>, <E object>>
+spam
+
+стр.281 Читал про декораторы, метоклассы, функцию super
