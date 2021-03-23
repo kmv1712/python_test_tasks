@@ -122,3 +122,61 @@ int find(int A[], int N, int x)
 Для поиска делим попалам и смотрим к какую сторону идти дальше
 33:28
  
+
+!Поиск в массиве двоичный
+- Массив должен быть упорядочен 
+O(log2N)
+
+int main()
+{
+	int N = 10;
+	int A[] = {1, 3, 3, 7
+	int x;
+	
+	cin >> x;
+	cout << "index of x is: "
+
+O(N^2) + O(log2N) 
+
+Универсальные квадратичные сортировки
+!Какая то сортировка через минимум 
+
+
+!Сортировки вставками O(N^2) 
+for(int pos; pos < N; pos++){
+	i = pos;
+	
+
+Мощность
+
+! Сортировка подсчетом O(N)
+
+ 	count_sort
+
+
+#include <iostream>
+using namespace std;
+
+void count_sort(int A[], int N)
+{
+	//Обязан знать диапазон сортированных чисел
+	int F[10] = {0};
+	for(int i = 0; i < N; i++)
+		F 
+}
+
+void generate_random_array(int A[], int N, int M)
+{
+	
+}
+
+
+
+int main()
+{
+	int N = 10;
+	int A[N];
+
+	for(int 
+
+2:00:13
