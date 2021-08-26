@@ -1,0 +1,10 @@
+Квадратичные сортировки
+
+  Сортировка вставками
+    for i in range(1, len(list_)):
+    while i > 0:
+        if list_[i] < list_[i-1]:
+            tmp = list_[i] 
+            list_[i] = list_[i-1]
+            list_[i-1] = tmp
+        i -=1
