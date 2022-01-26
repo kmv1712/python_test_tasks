@@ -1,0 +1,18 @@
+1) sudo apt update
+2) sudo apt install build-essential libncurses5-dev zlib1g-dev libnss3-dev libgdbm-dev libssl-dev libsqlite3-dev libffi-dev libreadline-dev curl libbz2-dev
+3) sudo wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz
+4) tar -xvf Python-3.9.7.tgz
+5) cd Python-3.9.7
+6) ./configure --enable-optimizations --prefix=/home/mihail/.Python3.9 # prefix, чтобы установить python в нужный файл
+7) make -j 2  # 2 - количество ядер.
+8) sudo make altinstall
+
+Пропишем в PATH путь до питон, чтбы вызывать из консоли python3.9
+nano ~/.bashrc
+В конце текста пишем
+export PATH=$PATH:/home/mihail/.python3.9/bin/
+сохраняем закрываем 
+source ~/.bashrc
+
+ls -la
+sudo rm -rf Python-3.9.7.tgz Python-3.9.2 # Удалим исходники
